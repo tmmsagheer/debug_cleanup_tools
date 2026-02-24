@@ -16,7 +16,7 @@ You can install the base dependencies via pip:
 pip install pandas pyarrow
 ```
 ## 🛠️ Available Tools
-### 1. inspect_parquet.py
+### 1. `inspect_parquet.py`
 
 Executes a strict structural and statistical inspection of a target Parquet file. It is specifically designed to expose hidden whitespaces in column names, identify schema anomalies, and track NaN/NaT propagations.
 
@@ -85,4 +85,33 @@ Dimensions: 541395 rows x 6 columns
 2025-12-30 15:29:00+05:30  972.90  974.00  972.05  973.10   28553.0  2025-12-30 15:29:00
 
 ============================================================
+```
+### 2. `trade_engine_images_purge.py`
+Executes a Least Recently Used (LRU) garbage collection against a target directory. It monitors the total directory size (in MB) and automatically purges the oldest files until the storage drops back down to your specified target size. 
+
+**Features:**
+* **LRU Purge Mechanism:** Identifies and deletes the oldest files first (based on modified time) to safely recover disk space.
+* **Configurable Thresholds:** Set your own maximum limit (`--limit`) and the target size you want to drop down to after a purge (`--target`).
+* **Pipeline-Ready JSON Output:** Silences standard print statements and strictly outputs a JSON telemetry payload to `stdout` for easy parsing by downstream orchestrators.
+* **Isolated File Logging:** Routes all detailed operational logs (info, warnings, errors) to a dedicated `execution.log` file in the `./logs` directory, keeping the console clean.
+
+**Usage:**
+```bash
+# Run with default settings (Dir: ./output/images, Limit: 500MB, Target: 450MB)
+python3 trade_engine_images_purge.py
+
+# Run with custom parameters
+python3 trade_engine_images_purge.py --dir /var/log/myapp --limit 1024.0 --target 800.0
+```
+#### Example Output (stdout):
+```JSON
+{
+  "status": "Purged",
+  "directory": "/var/log/myapp",
+  "files_purged": 142,
+  "size_before_mb": 1050.25,
+  "size_after_mb": 798.12,
+  "quota_limit_mb": 1024.0,
+  "execution_time_ms": 45.12
+}
 ```
