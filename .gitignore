@@ -1,0 +1,20 @@
+# Python bytecode (prevents __pycache__ folders)
+__pycache__/
+*.py[cod]
+*.swp
+execute_steps.txt
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# Data and Logs
+*.log
+data/*
+!data/sample.csv  # Keep specific samples if needed
+logs/*
+output/*
+
+# OS generated files
+.DS_Store
