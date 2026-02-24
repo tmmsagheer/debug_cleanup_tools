@@ -1,6 +1,6 @@
 # debug_cleanup_tools
 
-A repository of lightweight, standalone Python utility scripts designed for data debugging, structural inspection, and workflow cleanup. These tools are built to help quickly identify schema anomalies, hidden data quality issues, and structural inconsistencies in various datasets.
+A repository of lightweight, standalone Python utility scripts designed for data debugging, structural inspection, and workflow cleanup for n8n based stock analysis. These tools are built to help quickly identify schema anomalies, hidden data quality issues, and structural inconsistencies in various datasets.
 
 ## 📦 Prerequisites
 
@@ -18,7 +18,7 @@ pip install pandas pyarrow
 ## 🛠️ Available Tools
 ### 1. `inspect_parquet.py`
 
-Executes a strict structural and statistical inspection of a target Parquet file. It is specifically designed to expose hidden whitespaces in column names, identify schema anomalies, and track NaN/NaT propagations.
+Executes a strict structural and statistical inspection of a target Parquet file which contains OHLCV data. It is specifically designed to expose hidden whitespaces in column names, identify schema anomalies, and track NaN/NaT propagations.
 
 #### Features:
 
